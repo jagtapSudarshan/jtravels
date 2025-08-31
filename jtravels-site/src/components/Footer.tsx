@@ -1,11 +1,12 @@
 
 "use client";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "./ui/button"
+import { Input } from "./ui/input"
 import { Loader2 } from "lucide-react"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+
 
 export default function Footer() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
