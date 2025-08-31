@@ -53,7 +53,7 @@ export default function Footer() {
               onSubmit={handleSubscribe}
               className="mt-3 flex items-center"
             >
-              <motion.div<HTMLDivElement>
+              <motion.div
                 animate={
                   status === "error"
                     ? { x: [0, -8, 8, -8, 8, 0] }
