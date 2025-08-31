@@ -1,70 +1,36 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import { Loader2 } from "lucide-react"
 import { useState } from "react"
 import { motion } from "framer-motion"
 
 export default function Footer() {
-  const [email, setEmail] = useState("")
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus("loading")
-
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500)) // fake API
-      if (email.includes("@")) {
-        setStatus("success")
-        setEmail("")
-      } else {
-        setStatus("error")
-      }
-    } catch {
-      setStatus("error")
-    }
+  const handleSubscribe = () => {
+    setLoading(true)
+    setTimeout(() => setLoading(false), 2000) // fake API call
   }
 
   return (
-    <footer className="bg-gray-100 py-8 mt-12">
-      <div className="container mx-auto text-center">
-        <h2 className="text-lg font-semibold mb-4">Subscribe to our Newsletter</h2>
-        <form onSubmit={handleSubmit} className="flex justify-center items-center space-x-2">
-          <motion.div
-            key={status} // forces re-render animation
-            animate={
-              status === "error"
-                ? { x: [0, -8, 8, -8, 8, 0] }
-                : { x: 0 }
-            }
-            transition={{ duration: 0.4 }}
-            className="flex-1"
-          >
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="px-3 py-2 border rounded-lg w-64 focus:outline-none"
-            />
-          </motion.div>
-
-          <Button type="submit" disabled={status === "loading"}>
-            {status === "loading" ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              "Subscribe"
-            )}
-          </Button>
-        </form>
-
-        {status === "success" && (
-          <p className="text-green-600 mt-3">Subscribed successfully 🎉</p>
-        )}
-        {status === "error" && (
-          <p className="text-red-600 mt-3">Please enter a valid email</p>
-        )}
+    <footer className="bg-gray-900 text-white p-6 text-center">
+      <h2 className="text-lg mb-4">Subscribe to our newsletter</h2>
+      <div className="flex justify-center gap-2">
+        <motion.input
+          type="email"
+          placeholder="Enter your email"
+          className="px-3 py-2 rounded text-black"
+          whileFocus={{ scale: 1.05 }}
+        />
+        <motion.button
+          onClick={handleSubscribe}
+          disabled={loading}
+          className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 flex items-center gap-2"
+          whileHover={{ scale: 1.05 }}
+        >
+          {loading && <Loader2 className="animate-spin w-4 h-4" />}
+          Subscribe
+        </motion.button>
       </div>
     </footer>
   )
