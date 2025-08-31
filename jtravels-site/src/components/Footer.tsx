@@ -80,13 +80,14 @@ export default function Footer() {
             onSubmit={handleSubmit}
             className="flex flex-col gap-2 w-full sm:flex-row"
           >
-            <motion.div
-              animate={status === "error" ? { x: [0, -8, 8, -8, 8, 0] } : { x: 0 }}
-              transition={{ duration: 0.4 }}
-              className="flex-1"
-            >
-              <Input type="email" name="EMAIL" placeholder="Your email" required className="w-full" />
-            </motion.div>
+            <motion.div<HTMLDivElement>
+  animate={status === "error" ? { x: [0, -8, 8, -8, 8, 0] } : { x: 0 }}
+  transition={{ duration: 0.4 }}
+  className="flex-1"
+>
+  <Input type="email" name="EMAIL" placeholder="Your email" required className="w-full" />
+</motion.div>
+
 
             <Button type="submit" disabled={status === "loading"}>
               {status === "loading" ? (
