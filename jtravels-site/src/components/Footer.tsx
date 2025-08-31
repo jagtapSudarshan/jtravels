@@ -1,13 +1,20 @@
 "use client"
 
-import { Loader2 } from "lucide-react"
 import { useState, forwardRef } from "react"
 import { motion } from "framer-motion"
+import { Loader2 } from "lucide-react"
 
-// Create motion-enabled input with proper types
+// Motion-enabled input
 const MotionInput = motion(
   forwardRef<HTMLInputElement, React.ComponentProps<"input">>((props, ref) => (
     <input ref={ref} {...props} />
+  ))
+)
+
+// Motion-enabled button
+const MotionButton = motion(
+  forwardRef<HTMLButtonElement, React.ComponentProps<"button">>((props, ref) => (
+    <button ref={ref} {...props} />
   ))
 )
 
@@ -29,7 +36,7 @@ export default function Footer() {
           className="px-3 py-2 rounded text-black"
           whileFocus={{ scale: 1.05 }}
         />
-        <motion.button
+        <MotionButton
           onClick={handleSubscribe}
           disabled={loading}
           className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 flex items-center gap-2"
@@ -37,7 +44,7 @@ export default function Footer() {
         >
           {loading && <Loader2 className="animate-spin w-4 h-4" />}
           Subscribe
-        </motion.button>
+        </MotionButton>
       </div>
     </footer>
   )
